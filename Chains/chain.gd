@@ -13,37 +13,45 @@ class Point:
 	var velocity: Vector2 = (currentPosition - oldPosition)*.98
 	var par: Node2D
 	var collisionOverride: Vector2 = Vector2.INF
+	var lock: Vector2
 	
+	#Updates velocity every frame by verlet integration
 	func updateVel(newVelocity: Vector2 = Vector2(0,0)):
 		if newVelocity == Vector2(0,0):
 			velocity = (currentPosition - oldPosition) * .9
 		else:
 			velocity = newVelocity
-
+	#Adds velocity, shoots collision ray
 	func update():
+		
+		lock = Vector2(1,1)
 		newPosition = currentPosition + velocity
 		oldPosition = currentPosition
 		var ray = RayCast2D.new()
 		
 		ray.global_position = currentPosition
 		ray.target_position = newPosition - ray.global_position
-		ray.enabled
+		ray.enabled = true
+		ray.hit_from_inside = true
 		par.add_child(ray)
 		ray.force_raycast_update()
 		if ray.is_colliding():
-			print("ATTEMPT " + str(newPosition))
-			print("try " + str(ray.get_collision_point()))
 			
-			currentPosition = ray.get_collision_point()
+			
+			
+			var normal = ray.get_collision_normal().normalized()
+			currentPosition = ray.get_collision_point() + normal
+			if normal == Vector2(1,0) || normal == Vector2(-1,0):
+				lock = Vector2(0, 1)
+			elif normal == Vector2(0, 1) || normal == Vector2(0, -1):
+				lock = Vector2(1, 0)
+			
 			
 		else:
 			currentPosition = newPosition
 		par.remove_child(ray)
 		
-		#currentPosition = ((angle) * 112) + neighbor.currentPosition
-		#var target: Vector2 = ((angle) * maxLength) + neighbor.currentPosition
-		#currentPosition = currentPosition.lerp(((angle) * maxLength) + neighbor.currentPosition, 1)
-	
+	#Takes neighbor and moves the correct distance away
 	func fix(neighbor: Point):
 		var delta: Vector2 = neighbor.currentPosition - currentPosition
 		if delta.length() == 0:
@@ -52,24 +60,22 @@ class Point:
 		
 		var error = distance - maxLength
 		
-		currentPosition += delta.normalized() * error * .5
-		neighbor.currentPosition -= delta.normalized() * error * .5
+		currentPosition += delta.normalized() * error * .5 * lock
+		neighbor.currentPosition -= delta.normalized() * error * .5 * neighbor.lock
 	
+	
+	#just moves to the correct position
 	func lastFix(origin: Vector2):
 		var distance = currentPosition - origin
 		var angle = distance.normalized()
 		currentPosition = ((angle) * maxLength) + origin
 		
-	func firstFix(neighbor: Point):
-		var distance = neighbor.currentPosition - currentPosition
-		var angle = distance.normalized()
-		neighbor.currentPosition = neighbor.currentPosition - ((angle) * maxLength)
-		
-		
+
 var pointArray: Array[Point] = []
 
 var linePoints: Array[Vector2] =[]
 
+#Initiallizes array of points
 func _ready() -> void:
 	for i in 10:
 		var newPoint: Point = Point.new()
@@ -77,7 +83,8 @@ func _ready() -> void:
 		newPoint.par = self
 		pointArray.append(newPoint)
 		
-		
+
+
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		updateArray(pointArray.size()-1)
@@ -96,7 +103,7 @@ func updateArray(index: int = -1):
 	var first = true
 	var neighbor = Vector2(0,0)
 	for i in pointArray.size():
-		var neighbor2
+
 		var point = pointArray.get(i)
 		if first:
 			point.currentPosition = get_global_mouse_position()
