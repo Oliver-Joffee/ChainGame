@@ -31,12 +31,15 @@ class Point:
 		par.add_child(ray)
 		ray.force_raycast_update()
 		if ray.is_colliding():
-			print("IM DOING A LITTLE COLLISION")
-			collisionOverride = ray.get_collision_point()
+			print("ATTEMPT " + str(newPosition))
+			print("try " + str(ray.get_collision_point()))
+			
+			currentPosition = ray.get_collision_point()
+			
 		else:
-			collisionOverride = Vector2.INF
-		currentPosition = newPosition
+			currentPosition = newPosition
 		par.remove_child(ray)
+		
 		#currentPosition = ((angle) * 112) + neighbor.currentPosition
 		#var target: Vector2 = ((angle) * maxLength) + neighbor.currentPosition
 		#currentPosition = currentPosition.lerp(((angle) * maxLength) + neighbor.currentPosition, 1)
@@ -110,34 +113,9 @@ func updateArray(index: int = -1):
 func fixArray():
 	for loop in range(3):
 		for i in pointArray.size():
-			if pointArray.get(i).collisionOverride != Vector2.INF:
-				pointArray.get(i).currentPosition = pointArray.get(i).collisionOverride
-				pointArray.get(i).collisionOverride = Vector2.INF
 			if i == pointArray.size() - 1:
 				pointArray.get(i).lastFix(pointArray.get(i-1).currentPosition)
 			#elif i == 0:
 				#pass
 			else:
 				pointArray.get(i).fix(pointArray.get(i+1))
-		
-		#for i in pointArray.size() - 1:
-			#var ray: RayCast2D = RayCast2D.new()
-			#var currentPoint = pointArray.get(i)
-			#var nextPoint = pointArray.get(i+1)
-			#
-			#ray.global_position = currentPoint.currentPosition
-			#ray.target_position = nextPoint.currentPosition - ray.global_position 
-		#
-			#add_child(ray)
-			#ray.enabled = true
-			#ray.hit_from_inside = true
-			#
-			#ray.force_raycast_update()
-			#while ray.is_colliding():
-				#var normal = ray.get_collision_normal()
-				#nextPoint.currentPosition += normal * 10
-				#ray.target_position = nextPoint.currentPosition
-			#remove_child(ray)
-			
-
-				
