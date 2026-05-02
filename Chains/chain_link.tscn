@@ -1,3 +1,28 @@
 [gd_scene format=3 uid="uid://b4r1enuiax0e6"]
 
-[node name="ChainLink" type="Node2D" unique_id=1290885117]
+[ext_resource type="Script" uid="uid://s2bfqaa2164f" path="res://Chains/chain_link.gd" id="1_af04r"]
+[ext_resource type="Texture2D" uid="uid://cdlyco30fmej1" path="res://icon.svg" id="1_cji2p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_af04r"]
+size = Vector2(28, 112)
+
+[node name="ChainLink" type="RigidBody2D" unique_id=1141783377]
+collision_layer = 2
+mass = 100.0
+gravity_scale = 0.0
+script = ExtResource("1_af04r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2051111556]
+position = Vector2(56.00066, 0.00047683716)
+rotation = 1.5708432
+scale = Vector2(0.21875001, 0.87500006)
+texture = ExtResource("1_cji2p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=344560498]
+position = Vector2(56.00066, 0.00048065186)
+rotation = 1.5708432
+shape = SubResource("RectangleShape2D_af04r")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1411696354]
+position = Vector2(112, 0)
+rotation = 1.5708432

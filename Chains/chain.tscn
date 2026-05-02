@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bhhy5ysdk5i0c"]
+
+[ext_resource type="Script" uid="uid://d3vfuuwnf56f1" path="res://Chains/chain.gd" id="1_157ce"]
+[ext_resource type="Texture2D" uid="uid://cdlyco30fmej1" path="res://icon.svg" id="2_157ce"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_157ce"]
+
+[node name="Chain" type="Node2D" unique_id=1218256251]
+script = ExtResource("1_157ce")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1234284199]
+texture = ExtResource("2_157ce")
+texture_mode = 1
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1684747063]
+position = Vector2(733, 489)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=327076477]
+scale = Vector2(-14.801176, 21.29076)
+shape = SubResource("RectangleShape2D_157ce")
