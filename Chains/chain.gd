@@ -5,16 +5,11 @@ var max: float = 112
 class Point:
 	var currentPosition: Vector2 = Vector2(0,0)
 	var oldPosition: Vector2 = Vector2(0,0)
-	var oldPosition1: Vector2 = Vector2(0,0)
 	var neighbor: Point
-	var neighbor2: Point
 	var newPosition: Vector2 = Vector2(0,0)
 	var maxLength: float
 	var velocity: Vector2 = (currentPosition - oldPosition)*.98
 	var par: Node2D
-	var collisionOverride: Vector2 = Vector2.INF
-	var lock: Vector2
-	
 	#Updates velocity every frame by verlet integration
 	func updateVel(newVelocity: Vector2 = Vector2(0,0)):
 		if newVelocity == Vector2(0,0):
@@ -23,8 +18,6 @@ class Point:
 			velocity = newVelocity
 	#Adds velocity, shoots collision ray
 	func update():
-		
-		lock = Vector2(1,1)
 		newPosition = currentPosition + velocity
 		oldPosition = currentPosition
 		var ray = RayCast2D.new()
@@ -36,17 +29,8 @@ class Point:
 		par.add_child(ray)
 		ray.force_raycast_update()
 		if ray.is_colliding():
-			
-			
-			
 			var normal = ray.get_collision_normal().normalized()
 			currentPosition = ray.get_collision_point() + normal
-			if normal == Vector2(1,0) || normal == Vector2(-1,0):
-				lock = Vector2(0, 1)
-			elif normal == Vector2(0, 1) || normal == Vector2(0, -1):
-				lock = Vector2(1, 0)
-			
-			
 		else:
 			currentPosition = newPosition
 		par.remove_child(ray)
@@ -60,8 +44,8 @@ class Point:
 		
 		var error = distance - maxLength
 		
-		currentPosition += delta.normalized() * error * .5 * lock
-		neighbor.currentPosition -= delta.normalized() * error * .5 * neighbor.lock
+		currentPosition += delta.normalized() * error * .5 
+		neighbor.currentPosition -= delta.normalized() * error * .5 
 	
 	
 	#just moves to the correct position
