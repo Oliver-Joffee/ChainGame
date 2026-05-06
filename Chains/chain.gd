@@ -20,20 +20,8 @@ class Point:
 	func update():
 		newPosition = currentPosition + velocity
 		oldPosition = currentPosition
-		var ray = RayCast2D.new()
-		
-		ray.global_position = currentPosition
-		ray.target_position = newPosition - ray.global_position
-		ray.enabled = true
-		ray.hit_from_inside = true
-		par.add_child(ray)
-		ray.force_raycast_update()
-		if ray.is_colliding():
-			var normal = ray.get_collision_normal().normalized()
-			currentPosition = ray.get_collision_point() + normal
-		else:
-			currentPosition = newPosition
-		par.remove_child(ray)
+		newPosition = currentPosition + velocity
+		currentPosition = newPosition
 		
 	#Takes neighbor and moves the correct distance away
 	func fix(neighbor: Point):
@@ -47,6 +35,47 @@ class Point:
 		currentPosition += delta.normalized() * error * .5 
 		neighbor.currentPosition -= delta.normalized() * error * .5 
 	
+	func collide(neighbor: Point):
+		
+		
+		var space = par.get_world_2d().direct_space_state
+		var ray = PhysicsRayQueryParameters2D.create(currentPosition, neighbor.currentPosition)
+		ray.collide_with_bodies = true
+		
+		var result = space.intersect_ray(ray)
+		
+		if result:
+			var normal = result.normal
+			var fix = normal 
+			var collider = result.collider
+			
+			if collider is PhysicsObject && collider.attached:
+				return
+			
+			currentPosition += fix
+			oldPosition = currentPosition
+			neighbor.currentPosition += fix
+			neighbor.oldPosition = neighbor.currentPosition
+			
+			
+			
+			if collider is PhysicsObject:
+				
+				var segment: Vector2 = neighbor.currentPosition - currentPosition
+				var pushFix = Vector2(segment.y, -segment.x).normalized()
+				var difference = collider.global_position - (currentPosition + neighbor.currentPosition) / 2
+				
+				var fix1 = Vector2(pushFix.x/abs(pushFix.x), pushFix.y/abs(pushFix.y))
+				var dif1 = Vector2(difference.x / abs(difference.x), difference.y / abs(difference.y))
+				
+				if fix1 == dif1:
+					collider.global_position += pushFix
+				else:
+					collider.global_position -= pushFix
+			
+			
+		
+		
 	
 	#just moves to the correct position
 	func lastFix(origin: Vector2):
@@ -70,8 +99,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		updateArray(pointArray.size()-1)
+	if Input.is_action_pressed("ui_accept"):
+		updateArray(pointArray.size() - 1)
+		pointArray[pointArray.size()-1].currentPosition = pointArray[pointArray.size()-9].currentPosition
 	else:
 		updateArray()
 	
@@ -79,6 +109,13 @@ func _physics_process(delta: float) -> void:
 	linePoints.clear()
 	for point in pointArray:
 		linePoints.append(point.currentPosition)
+	$Grapple.global_position = pointArray[-1].currentPosition
+	
+	var dif: Vector2 = (pointArray[-1].currentPosition - pointArray[-2].currentPosition).normalized()
+	var rot = rad_to_deg(dif.angle())
+	
+	$Grapple.rotation_degrees = rot
+	
 	$Line2D.points = linePoints
 
 	
@@ -89,10 +126,11 @@ func updateArray(index: int = -1):
 	for i in pointArray.size():
 
 		var point = pointArray.get(i)
+		point.maxLength = max
 		if first:
 			point.currentPosition = get_global_mouse_position()
 		elif i == index:
-			point.updateVel(Vector2(1000, 0))
+			point.updateVel(Vector2(1000, 1))
 			point.update()
 		else:
 			point.neighbor = neighbor
@@ -102,6 +140,8 @@ func updateArray(index: int = -1):
 		neighbor = point
 
 func fixArray():
+
+	
 	for loop in range(3):
 		for i in pointArray.size():
 			if i == pointArray.size() - 1:
@@ -110,3 +150,10 @@ func fixArray():
 				#pass
 			else:
 				pointArray.get(i).fix(pointArray.get(i+1))
+				pointArray.get(i).collide(pointArray.get(i+1))
+		for i in range(pointArray.size()-1):
+			var p = pointArray.get(i)
+			var n = pointArray.get(i+1)
+			
+			p.collide(n)
+			

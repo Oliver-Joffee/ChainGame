@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://baisj01ccol7d"]
+
+[ext_resource type="Script" uid="uid://kacnxx6a5ynj" path="res://Chains/grapple.gd" id="1_2sph5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ydhdj"]
+size = Vector2(40, 40)
+
+[node name="Grapple" type="Area2D" unique_id=1907562004]
+script = ExtResource("1_2sph5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2091457131]
+shape = SubResource("RectangleShape2D_ydhdj")
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=868481323]
+
+[node name="ColorRect" type="ColorRect" parent="Marker2D" unique_id=1466071713]
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

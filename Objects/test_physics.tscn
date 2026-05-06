@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://k2snd0b5bdpo"]
+
+[ext_resource type="Script" uid="uid://cs8am1q2b0j3o" path="res://Objects/PhysicsObject.gd" id="1_bgyba"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_psqya"]
+size = Vector2(112, 112)
+
+[node name="TestPhysics" type="RigidBody2D" unique_id=1886898469 groups=["pushables"]]
+gravity_scale = 0.0
+script = ExtResource("1_bgyba")
+metadata/_custom_type_script = "uid://cs8am1q2b0j3o"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1630814589]
+shape = SubResource("RectangleShape2D_psqya")
