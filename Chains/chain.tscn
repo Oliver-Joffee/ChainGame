@@ -19,9 +19,6 @@ _data = {
 &"test": SubResource("Animation_2yj8g")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_elxsj"]
-size = Vector2(200, 500)
-
 [node name="Chain" type="Node2D" unique_id=1218256251]
 script = ExtResource("1_157ce")
 
@@ -37,9 +34,3 @@ autoplay = &"test"
 position = Vector2(1015, 499)
 
 [node name="Grapple" parent="." unique_id=1907562004 instance=ExtResource("4_elxsj")]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1990366749]
-position = Vector2(629, 519)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=368953188]
-shape = SubResource("RectangleShape2D_elxsj")

@@ -35,6 +35,9 @@ class Point:
 		currentPosition += delta.normalized() * error * .5 
 		neighbor.currentPosition -= delta.normalized() * error * .5 
 	
+	func force(force: Vector2):
+		oldPosition += force
+	
 	func collide(neighbor: Point):
 		
 		
@@ -52,9 +55,9 @@ class Point:
 			if collider is PhysicsObject && collider.attached:
 				return
 			
-			currentPosition += fix
+			currentPosition += fix * 25
 			oldPosition = currentPosition
-			neighbor.currentPosition += fix
+			neighbor.currentPosition += fix *25
 			neighbor.oldPosition = neighbor.currentPosition
 			
 			
@@ -99,11 +102,10 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_pressed("ui_accept"):
-		updateArray(pointArray.size() - 1)
-		pointArray[pointArray.size()-1].currentPosition = pointArray[pointArray.size()-9].currentPosition
-	else:
-		updateArray()
+	updateArray()
+	
+	if Input.is_action_just_pressed("ui_accept"):
+		pointArray[-1].force((pointArray[-1].currentPosition - pointArray[0].currentPosition) * .3)
 	
 	fixArray()
 	linePoints.clear()

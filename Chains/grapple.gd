@@ -3,6 +3,7 @@ extends Area2D
 class object:
 	var physic: PhysicsObject
 	var relative: Vector2
+	var startRot: float
 
 var objects: Array[object]
 
@@ -20,7 +21,8 @@ func _on_body_entered(body: Node2D) -> void:
 			
 			newObject.physic = body
 			newObject.physic.attached = true
-			newObject.relative = body.global_position - global_position
+			newObject.startRot = body.rotation_degrees
+			newObject.relative = to_local(body.global_position)
 			
 			objects.append(newObject)
 		
@@ -30,4 +32,4 @@ func _physics_process(delta: float) -> void:
 	for o in objects:
 		$Marker2D.position = o.relative
 		o.physic.global_position = to_global($Marker2D.position)
-		o.physic.rotation_degrees = rotation_degrees
+		o.physic.rotation_degrees = rotation_degrees + o.startRot
