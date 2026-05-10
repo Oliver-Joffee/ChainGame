@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://5wl0astn7x66"]
+
+[ext_resource type="Script" uid="uid://c3euu8mc1lvy3" path="res://Player/player.gd" id="1_4ntmi"]
+[ext_resource type="PackedScene" uid="uid://bhhy5ysdk5i0c" path="res://Player/Chains/chain.tscn" id="1_l8h54"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ntmi"]
+size = Vector2(112, 112)
+
+[node name="Player" type="CharacterBody2D" unique_id=371775340]
+script = ExtResource("1_4ntmi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=96450577]
+shape = SubResource("RectangleShape2D_4ntmi")
+
+[node name="Chain" parent="." unique_id=1218256251 instance=ExtResource("1_l8h54")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1459247221]
+zoom = Vector2(0.5, 0.5)

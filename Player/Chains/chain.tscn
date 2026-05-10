@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bhhy5ysdk5i0c"]
+
+[ext_resource type="Script" uid="uid://d3vfuuwnf56f1" path="res://Player/Chains/chain.gd" id="1_157ce"]
+[ext_resource type="Texture2D" uid="uid://cdlyco30fmej1" path="res://icon.svg" id="2_157ce"]
+[ext_resource type="PackedScene" uid="uid://baisj01ccol7d" path="res://Player/Chains/grapple.tscn" id="4_elxsj"]
+
+[node name="Chain" type="Node2D" unique_id=1218256251]
+script = ExtResource("1_157ce")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=1234284199]
+texture = ExtResource("2_157ce")
+texture_mode = 1
+
+[node name="Grapple" parent="." unique_id=1907562004 instance=ExtResource("4_elxsj")]

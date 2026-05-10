@@ -26,10 +26,14 @@ func _on_body_entered(body: Node2D) -> void:
 			
 			objects.append(newObject)
 		
-		
+func clear():
+	for i in objects:
+		i.physic.attached = false
+	objects.clear()
 		
 func _physics_process(delta: float) -> void:
 	for o in objects:
 		$Marker2D.position = o.relative
-		o.physic.global_position = to_global($Marker2D.position)
+		#o.physic.global_position = to_global($Marker2D.position)
+		o.physic.velocity = to_global($Marker2D.position) - o.physic.global_position
 		o.physic.rotation_degrees = rotation_degrees + o.startRot

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://baisj01ccol7d"]
 
-[ext_resource type="Script" uid="uid://kacnxx6a5ynj" path="res://Chains/grapple.gd" id="1_2sph5"]
+[ext_resource type="Script" uid="uid://kacnxx6a5ynj" path="res://Player/Chains/grapple.gd" id="1_2sph5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ydhdj"]
 size = Vector2(40, 40)

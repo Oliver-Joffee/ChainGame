@@ -1,6 +1,7 @@
 extends Node2D
 
-var max: float = 112
+var max: float = 128
+@export var player: CharacterBody2D
 
 class Point:
 	var currentPosition: Vector2 = Vector2(0,0)
@@ -57,8 +58,9 @@ class Point:
 			
 			currentPosition += fix * 25
 			oldPosition = currentPosition
-			neighbor.currentPosition += fix *25
+			neighbor.currentPosition += fix * 25
 			neighbor.oldPosition = neighbor.currentPosition
+	
 			
 			
 			
@@ -79,7 +81,6 @@ class Point:
 			
 		
 		
-	
 	#just moves to the correct position
 	func lastFix(origin: Vector2):
 		var distance = currentPosition - origin
@@ -97,16 +98,26 @@ func _ready() -> void:
 		var newPoint: Point = Point.new()
 		newPoint.maxLength = max
 		newPoint.par = self
+		newPoint.currentPosition = global_position
 		pointArray.append(newPoint)
 		
 
-
 func _physics_process(delta: float) -> void:
+	global_position = Vector2(0,0)
 	updateArray()
+	if Input.is_action_just_pressed("long"):
+		max += 10
 	
-	if Input.is_action_just_pressed("ui_accept"):
-		pointArray[-1].force((pointArray[-1].currentPosition - pointArray[0].currentPosition) * .3)
 	
+	if Input.is_action_pressed("ui_accept"):
+		#pointArray[-1].force((pointArray[-1].currentPosition - pointArray[0].currentPosition) * .3)
+		var angle: Vector2 = (pointArray[0].currentPosition - pointArray[-1].currentPosition).normalized()
+		var perpAngle = Vector2(-angle.y, angle.x)
+		
+		pointArray[-1].force(perpAngle * 200)
+
+	if Input.is_action_just_pressed("ui_right"):
+		$Grapple.clear()
 	fixArray()
 	linePoints.clear()
 	for point in pointArray:
@@ -130,7 +141,8 @@ func updateArray(index: int = -1):
 		var point = pointArray.get(i)
 		point.maxLength = max
 		if first:
-			point.currentPosition = get_global_mouse_position()
+			point.currentPosition = get_parent().global_position
+			
 		elif i == index:
 			point.updateVel(Vector2(1000, 1))
 			point.update()
@@ -138,18 +150,20 @@ func updateArray(index: int = -1):
 			point.neighbor = neighbor
 			point.updateVel()
 			point.update()
+			
 		first = false
 		neighbor = point
 
 func fixArray():
-
-	
-	for loop in range(3):
+	for loop in range(12):
 		for i in pointArray.size():
 			if i == pointArray.size() - 1:
 				pointArray.get(i).lastFix(pointArray.get(i-1).currentPosition)
-			#elif i == 0:
-				#pass
+			elif i == 1:
+				pointArray.get(i).lastFix(pointArray.get(0).currentPosition)
+				pointArray.get(i).fix(pointArray.get(i+1))
+			elif i == 0:
+				pass
 			else:
 				pointArray.get(i).fix(pointArray.get(i+1))
 				pointArray.get(i).collide(pointArray.get(i+1))
