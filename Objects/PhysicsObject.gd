@@ -14,22 +14,23 @@ var specVel: Vector2 = Vector2(0,0)
 func detach():
 	attached = false
 	attachable = false
+	set_collision_mask_value(1, true)
 	var enemies: Array = get_enemies()
 	var enemyAngles: Array[float]
 	var velAngle = velocity.angle()
 	var closestAngle: float
 	print(enemies.size())
-	for i in enemies:
+	for i in range(enemies.size()):
 		enemyAngles.append((enemies[i].global_position - global_position).angle())
 	
-	for i in enemyAngles:
-		if i == 1:
+	for i in range(enemyAngles.size()):
+		if i == 0:
 			closestAngle = enemyAngles[i]
 		else:
 			if abs(enemyAngles[i] - velAngle) < abs(closestAngle - velAngle):
 				closestAngle = enemyAngles[i]
 	
-	if enemies.size() > 1:
+	if enemies.size() >= 1:
 		specVel = Vector2.from_angle(closestAngle) * velocity.length()
 	
 	await get_tree().create_timer(.5).timeout
@@ -41,7 +42,7 @@ func _ready() -> void:
 	hitbox.body_entered.connect(collide)
 
 func get_enemies() -> Array:
-	return get_tree().get_nodes_in_group("Damagables")
+	return get_tree().get_nodes_in_group("Damageable")
 
 func _physics_process(delta: float) -> void:
 	update()
@@ -49,6 +50,11 @@ func _physics_process(delta: float) -> void:
 func collide(body):
 	print("yay")
 	print(body)
+	
+func attach():
+	attached = true
+	set_collision_mask_value(1, false)
+	
 	
 func update():
 	if !attached:

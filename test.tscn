@@ -25,6 +25,8 @@ tile_set = SubResource("TileSet_ykrsh")
 [node name="Player" parent="." unique_id=371775340 instance=ExtResource("1_6uqi0")]
 
 [node name="TestPhysics" parent="." unique_id=1886898469 instance=ExtResource("2_ppyta")]
+position = Vector2(589, -320)
+collision_mask = 1
 friction = 0.9
 
 [node name="Enemy" parent="." unique_id=1649313040 instance=ExtResource("4_ppyta")]

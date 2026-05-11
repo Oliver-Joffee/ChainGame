@@ -12,3 +12,5 @@ texture = ExtResource("2_157ce")
 texture_mode = 1
 
 [node name="Grapple" parent="." unique_id=1907562004 instance=ExtResource("4_elxsj")]
+collision_layer = 3
+collision_mask = 3

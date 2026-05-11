@@ -20,7 +20,7 @@ func _on_body_entered(body: Node2D) -> void:
 			var newObject = object.new()
 			
 			newObject.physic = body
-			newObject.physic.attached = true
+			newObject.physic.attach()
 			newObject.startRot = body.rotation_degrees
 			newObject.relative = to_local(body.global_position)
 			
