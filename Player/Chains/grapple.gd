@@ -16,7 +16,7 @@ func objectIn(object: PhysicsObject) -> bool:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is PhysicsObject:
-		if !objectIn(body):
+		if !objectIn(body) && body.attachable:
 			var newObject = object.new()
 			
 			newObject.physic = body
@@ -28,7 +28,7 @@ func _on_body_entered(body: Node2D) -> void:
 		
 func clear():
 	for i in objects:
-		i.physic.attached = false
+		i.physic.detach()
 	objects.clear()
 		
 func _physics_process(delta: float) -> void:

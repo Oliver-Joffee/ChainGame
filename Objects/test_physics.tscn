@@ -11,8 +11,6 @@ size = Vector2(112, 112)
 [node name="TestPhysics" type="RigidBody2D" unique_id=1886898469 node_paths=PackedStringArray("hitbox") groups=["pushables"]]
 gravity_scale = 0.0
 script = ExtResource("1_bgyba")
-weight = null
-friction = null
 hitbox = NodePath("Area2D")
 metadata/_custom_type_script = "uid://cs8am1q2b0j3o"
 

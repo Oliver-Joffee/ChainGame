@@ -3,6 +3,7 @@ extends Node2D
 var max: float = 128
 @export var player: CharacterBody2D
 
+
 class Point:
 	var currentPosition: Vector2 = Vector2(0,0)
 	var oldPosition: Vector2 = Vector2(0,0)
@@ -94,27 +95,35 @@ var linePoints: Array[Vector2] =[]
 
 #Initiallizes array of points
 func _ready() -> void:
-	for i in 10:
+	for i in 5:
 		var newPoint: Point = Point.new()
 		newPoint.maxLength = max
 		newPoint.par = self
 		newPoint.currentPosition = global_position
 		pointArray.append(newPoint)
 		
+func swingToMouse():
+		var target: Vector2 = get_global_mouse_position()
+		var current = pointArray[-1].currentPosition
+		var dist = (current - target)
+		var angle = dist.normalized()
+		pointArray[-1].force(angle * clamp(dist.length(), 0, max * pointArray.size()))
+
+func swing():
+	var dist: Vector2 = (pointArray[-1].currentPosition - pointArray[0].currentPosition).normalized()
+	var tangent: Vector2 = Vector2(-dist.y, dist.x)
+	for i in range(pointArray.size()-1):
+		var point = pointArray[i]
+		point.force(tangent * 100 * i/10)
+		
 
 func _physics_process(delta: float) -> void:
 	global_position = Vector2(0,0)
 	updateArray()
-	if Input.is_action_just_pressed("long"):
-		max += 10
 	
-	
-	if Input.is_action_pressed("ui_accept"):
+	if Input.is_action_pressed("leftClick"):
 		#pointArray[-1].force((pointArray[-1].currentPosition - pointArray[0].currentPosition) * .3)
-		var angle: Vector2 = (pointArray[0].currentPosition - pointArray[-1].currentPosition).normalized()
-		var perpAngle = Vector2(-angle.y, angle.x)
-		
-		pointArray[-1].force(perpAngle * 200)
+		swing()
 
 	if Input.is_action_just_pressed("ui_right"):
 		$Grapple.clear()
@@ -172,4 +181,3 @@ func fixArray():
 			var n = pointArray.get(i+1)
 			
 			p.collide(n)
-			
