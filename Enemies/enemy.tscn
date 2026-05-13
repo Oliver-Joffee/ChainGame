@@ -4,13 +4,23 @@
 [ext_resource type="Texture2D" uid="uid://cdlyco30fmej1" path="res://icon.svg" id="2_bxkaj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_47qgu"]
-size = Vector2(112, 112)
+size = Vector2(128, 128)
 
-[node name="Enemy" type="CharacterBody2D" unique_id=1649313040 groups=["Damageable"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxkaj"]
+size = Vector2(63, 200)
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1649313040 node_paths=PackedStringArray("damBox") groups=["Damageable"]]
 script = ExtResource("1_3ih25")
+damBox = NodePath("Area2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=652861406]
 shape = SubResource("RectangleShape2D_47qgu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=431317409]
 texture = ExtResource("2_bxkaj")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=698870212]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=46255125]
+position = Vector2(131.5, 0)
+shape = SubResource("RectangleShape2D_bxkaj")

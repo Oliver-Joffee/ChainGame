@@ -2,23 +2,14 @@
 
 [ext_resource type="Script" uid="uid://cs8am1q2b0j3o" path="res://Objects/PhysicsObject.gd" id="1_bgyba"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_psqya"]
-size = Vector2(112, 112)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8768x"]
+size = Vector2(128, 128)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bgyba"]
-size = Vector2(112, 112)
-
-[node name="TestPhysics" type="RigidBody2D" unique_id=1886898469 node_paths=PackedStringArray("hitbox") groups=["pushables"]]
-collision_mask = 2
-gravity_scale = 0.0
+[node name="TestPhysics" type="Area2D" unique_id=1772979599 groups=["pushables"]]
 script = ExtResource("1_bgyba")
-hitbox = NodePath("Area2D")
+weight = 2.0
+originalFriction = 0.95
 metadata/_custom_type_script = "uid://cs8am1q2b0j3o"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1630814589]
-shape = SubResource("RectangleShape2D_psqya")
-
-[node name="Area2D" type="Area2D" parent="." unique_id=29453620]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2119727603]
-shape = SubResource("RectangleShape2D_bgyba")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=699442793]
+shape = SubResource("RectangleShape2D_8768x")

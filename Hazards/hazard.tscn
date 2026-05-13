@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bscu5ssnysybe"]
+
+[ext_resource type="Script" uid="uid://bbvynatbwymvl" path="res://Hazards/hazard.gd" id="1_sc12b"]
+
+[node name="Hazard" type="Area2D" unique_id=171165492]
+visible = false
+script = ExtResource("1_sc12b")

@@ -1,8 +1,13 @@
 extends Node2D
+class_name Chain
 
-var max: float = 128
+var stretch: float = .5
+
+@export var origMax: float = 128
+var max: float = 0
 @export var player: CharacterBody2D
 
+var out: bool = false
 
 class Point:
 	var currentPosition: Vector2 = Vector2(0,0)
@@ -11,7 +16,7 @@ class Point:
 	var newPosition: Vector2 = Vector2(0,0)
 	var maxLength: float
 	var velocity: Vector2 = (currentPosition - oldPosition)*.98
-	var par: Node2D
+	var par: Chain
 	#Updates velocity every frame by verlet integration
 	func updateVel(newVelocity: Vector2 = Vector2(0,0)):
 		if newVelocity == Vector2(0,0):
@@ -34,8 +39,8 @@ class Point:
 		
 		var error = distance - maxLength
 		
-		currentPosition += delta.normalized() * error * .5 
-		neighbor.currentPosition -= delta.normalized() * error * .5 
+		currentPosition += delta.normalized() * error * par.stretch
+		neighbor.currentPosition -= delta.normalized() * error * par.stretch
 	
 	func force(force: Vector2):
 		oldPosition += force
@@ -54,7 +59,7 @@ class Point:
 			var fix = normal 
 			var collider = result.collider
 			
-			if collider is PhysicsObject && collider.attached:
+			if (collider is PhysicsObject && collider.attached) || collider is Player:
 				return
 			
 			currentPosition += fix * 25
@@ -93,6 +98,19 @@ var pointArray: Array[Point] = []
 
 var linePoints: Array[Vector2] =[]
 
+func send(pos: Vector2):
+	out = true
+	max = origMax
+	pointArray[-1].force((pointArray[-1].currentPosition - pos).normalized() * max/2 * pointArray.size())
+	$Grapple.monitoring = true
+
+func retract(pull: bool = false):
+	out = false
+	max = 0
+	$Grapple.clear()
+	$Grapple.monitoring = false
+	
+
 #Initiallizes array of points
 func _ready() -> void:
 	for i in 5:
@@ -121,12 +139,23 @@ func _physics_process(delta: float) -> void:
 	global_position = Vector2(0,0)
 	updateArray()
 	
-	if Input.is_action_pressed("leftClick"):
+	
+	
+	if Input.is_action_just_pressed("leftClick"):
+		if !out:
+			send(get_global_mouse_position())
+		else:
+			retract()
+	
+	if Input.is_action_pressed("ui_accept"):
+		get_parent().velOverride = .5
 		#pointArray[-1].force((pointArray[-1].currentPosition - pointArray[0].currentPosition) * .3)
 		swing()
 
-	if Input.is_action_just_pressed("ui_right"):
+	if Input.is_action_just_released("ui_accept"):
 		$Grapple.clear()
+		retract()
+		get_parent().velOverride = 1
 	fixArray()
 	linePoints.clear()
 	for point in pointArray:

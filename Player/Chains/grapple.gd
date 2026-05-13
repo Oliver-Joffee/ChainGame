@@ -37,3 +37,16 @@ func _physics_process(delta: float) -> void:
 		#o.physic.global_position = to_global($Marker2D.position)
 		o.physic.velocity = to_global($Marker2D.position) - o.physic.global_position
 		o.physic.rotation_degrees = rotation_degrees + o.startRot
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if area is PhysicsObject:
+		if !objectIn(area) && area.attachable:
+			var newObject = object.new()
+			
+			newObject.physic = area
+			newObject.physic.attach()
+			newObject.startRot = area.rotation_degrees
+			newObject.relative = to_local(area.global_position)
+			
+			objects.append(newObject)

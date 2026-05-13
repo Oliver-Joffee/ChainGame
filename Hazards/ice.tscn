@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ykvapdd3if02"]
+
+[ext_resource type="Script" uid="uid://cufj004bmluft" path="res://Hazards/ice.gd" id="1_50lvr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_50lvr"]
+size = Vector2(256, 256)
+
+[node name="Ice" type="Area2D" unique_id=856189855]
+collision_layer = 2147483649
+monitoring = false
+script = ExtResource("1_50lvr")
+metadata/_custom_type_script = "uid://bbvynatbwymvl"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=96931118]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_50lvr")
