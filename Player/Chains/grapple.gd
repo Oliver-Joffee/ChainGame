@@ -1,5 +1,4 @@
 extends Area2D
-
 class object:
 	var physic: PhysicsObject
 	var relative: Vector2

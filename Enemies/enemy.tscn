@@ -11,6 +11,7 @@ size = Vector2(63, 200)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1649313040 node_paths=PackedStringArray("damBox") groups=["Damageable"]]
 script = ExtResource("1_3ih25")
+health = 1.0
 damBox = NodePath("Area2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=652861406]

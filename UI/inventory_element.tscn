@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bdlfc5k0vb278"]
+
+[ext_resource type="Script" uid="uid://c4pisplxh4h62" path="res://UI/inventory_element.gd" id="1_dyfe3"]
+
+[node name="InventoryElement" type="HBoxContainer" unique_id=2141331261]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_dyfe3")
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=792820234]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="." unique_id=2067177270]
+layout_mode = 2
+
+[connection signal="button_up" from="TextureButton" to="." method="_on_texture_button_button_up"]

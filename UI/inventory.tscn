@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://c1xv2kugj6a21"]
+
+[ext_resource type="Script" uid="uid://132ogmkqnl3b" path="res://UI/inventory.gd" id="1_23vm5"]
+
+[node name="Inventory" type="Control" unique_id=1013650725]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_23vm5")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1788662753]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=970698364]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VScrollBar" type="VScrollBar" parent="CenterContainer" unique_id=83536788]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VScrollBar" unique_id=1042073739]
+layout_mode = 0
+offset_left = -95.0
+offset_top = -6.0
+offset_right = 103.0
+offset_bottom = 14.0
+grow_vertical = 2

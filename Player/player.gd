@@ -17,6 +17,8 @@ var health: float = 100
 @export var speed: float = 1000
 @export var chain: Chain
 
+
+
 func stun():
 	state = STATES.STUNNED
 
@@ -34,7 +36,10 @@ func knockback(source: Vector2, force: float):
 	velOffset += (global_position - source).normalized() * force
 
 func _physics_process(delta: float) -> void:
-
+	
+	for body in $Pickup.get_overlapping_areas():
+		if body is PhysicsObject:
+			pass
 	
 	if state == STATES.NORMAL:
 		if Input.is_action_just_pressed("dash") && velOverride == 1:
@@ -50,3 +55,23 @@ func _physics_process(delta: float) -> void:
 	if velOffset.length() < 1:
 		velOffset = Vector2.ZERO
 	move_and_slide()
+
+
+func _on_pickup_area_entered(area: Area2D) -> void:
+	if area is PhysicsObject:
+		area.pickingUp = true
+
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("ui_right"):
+		spawn(inventory[0])
+
+func spawn(object: PhysicsObject):
+	get_parent().add_child(object)
+	object.global_position = global_position + Vector2(0, 128)
+	object.oldPosition = object.global_position
+	
+	inventory.erase(object)
+
+func _on_pickup_area_exited(area: Area2D) -> void:
+	if area is PhysicsObject:
+		area.pickingUp = false

@@ -1,25 +1,24 @@
 [gd_scene format=3 uid="uid://g37sxqjputgr"]
 
 [ext_resource type="Script" uid="uid://omd7iaf6awbw" path="res://Objects/icy_object.gd" id="1_ey770"]
+[ext_resource type="Texture2D" uid="uid://cdlyco30fmej1" path="res://icon.svg" id="2_asusx"]
+[ext_resource type="PackedScene" uid="uid://c6gij1a5hxpec" path="res://Objects/object_label.tscn" id="3_chkvf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fuvr6"]
 size = Vector2(128, 128)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ey770"]
-size = Vector2(256, 256)
-
-[node name="IcyObject" type="Area2D" unique_id=1427098102]
+[node name="IcyObject" type="Area2D" unique_id=1427098102 node_paths=PackedStringArray("sprite", "label")]
 script = ExtResource("1_ey770")
+texture = ExtResource("2_asusx")
+sprite = NodePath("Sprite2D")
+objectName = "Ice"
+label = NodePath("ObjectLabel")
+desc = "Creates ice where it moves."
 metadata/_custom_type_script = "uid://cs8am1q2b0j3o"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=496978073]
 shape = SubResource("RectangleShape2D_fuvr6")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1761061079]
-collision_layer = 0
-collision_mask = 2147483648
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1536468956]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=444815430]
-shape = SubResource("RectangleShape2D_ey770")
-
-[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
+[node name="ObjectLabel" parent="." unique_id=934941461 instance=ExtResource("3_chkvf")]

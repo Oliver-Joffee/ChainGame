@@ -14,6 +14,8 @@ func gameover():
 	get_parent().add_child(newGold)
 	newGold.global_position = global_position
 	queue_free()
+	var level: Level = get_parent()
+	level.checkForEnemies()
 
 func _ready() -> void:
 	damBox.body_entered.connect(attack)

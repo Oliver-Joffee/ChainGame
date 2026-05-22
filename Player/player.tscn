@@ -6,6 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ntmi"]
 size = Vector2(128, 128)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_btcbx"]
+size = Vector2(256, 256)
+
 [node name="Player" type="CharacterBody2D" unique_id=371775340 node_paths=PackedStringArray("chain")]
 script = ExtResource("1_4ntmi")
 chain = NodePath("Chain")
@@ -14,3 +17,11 @@ chain = NodePath("Chain")
 shape = SubResource("RectangleShape2D_4ntmi")
 
 [node name="Chain" parent="." unique_id=1218256251 instance=ExtResource("1_l8h54")]
+
+[node name="Pickup" type="Area2D" parent="." unique_id=1974387160]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pickup" unique_id=1134879306]
+shape = SubResource("RectangleShape2D_btcbx")
+
+[connection signal="area_entered" from="Pickup" to="." method="_on_pickup_area_entered"]
+[connection signal="area_exited" from="Pickup" to="." method="_on_pickup_area_exited"]

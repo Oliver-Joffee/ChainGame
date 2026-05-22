@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c6gij1a5hxpec"]
+
+[ext_resource type="Script" uid="uid://ct03fd6dof6ar" path="res://Objects/object_label.gd" id="1_vdt6b"]
+
+[node name="ObjectLabel" type="Label" unique_id=934941461]
+offset_top = -128.0
+offset_right = 40.0
+offset_bottom = -89.0
+theme_override_font_sizes/font_size = 48
+text = "kskkskskskskksks"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_vdt6b")
+
+[node name="Timer" type="Timer" parent="." unique_id=1135979551]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,6 +1,14 @@
 extends Area2D
 class_name PhysicsObject
 
+@export var texture: Texture
+@export var sprite: Sprite2D
+@export var objectName: String
+@export var label: Label
+@export var desc: String
+@export var price: int = 3
+
+var pickingUp: bool = false
 var velocity: Vector2
 var oldPosition: Vector2
 var attached: bool = false
@@ -38,17 +46,36 @@ func detach():
 	await get_tree().create_timer(.5).timeout
 	attachable = true
 
+func pickup():
+	if attached:
+		$ObjectLabel.change("Release the chain first.")
+		return
+	detach()
+	Globals.Player.inventory.append(self)
+	get_parent().remove_child(self)
+
 func _ready() -> void:
+	label.text = name + " Press E to pick up"
+	label.orig = name + " Press E to pick up"
+	sprite.texture = texture
 	friction = originalFriction
 	body_entered.connect(collide)
 	oldPosition = global_position
-
 
 func get_enemies() -> Array:
 	return get_tree().get_nodes_in_group("Damageable")
 
 func _physics_process(delta: float) -> void:
-	update()
+	if pickingUp:
+		label.visible = true
+	else:
+		label.visible = false
+	update(delta)
+
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("pickup"):
+		if pickingUp:
+			pickup()
 
 func collide(body):
 	if body is Enemy && !attached:
@@ -70,9 +97,9 @@ func attach():
 	#set_collision_mask_value(1, false)
 	
 	
-func update():
+func update(delta: float):
 	if !attached:
-		velocity = (global_position - oldPosition) * friction
+		velocity = (global_position - oldPosition) * pow(friction, delta * 60)
 	
 	if specVel != Vector2(0,0):
 		velocity = specVel

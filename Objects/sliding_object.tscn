@@ -1,14 +1,25 @@
 [gd_scene format=3 uid="uid://bkjmt7wwtkjpl"]
 
 [ext_resource type="Script" uid="uid://cs8am1q2b0j3o" path="res://Objects/PhysicsObject.gd" id="1_5gxjb"]
+[ext_resource type="PackedScene" uid="uid://c6gij1a5hxpec" path="res://Objects/object_label.tscn" id="2_bseo5"]
+[ext_resource type="Texture2D" uid="uid://cdlyco30fmej1" path="res://icon.svg" id="2_wijcp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxjb"]
 size = Vector2(128, 128)
 
-[node name="SlidingObject" type="Area2D" unique_id=733050072]
+[node name="SlidingObject" type="Area2D" unique_id=733050072 node_paths=PackedStringArray("sprite", "label")]
 script = ExtResource("1_5gxjb")
+texture = ExtResource("2_wijcp")
+sprite = NodePath("Sprite2D")
+objectName = "Sliding Object"
+label = NodePath("ObjectLabel")
+desc = "An object that loses velocity very slowly"
 originalFriction = 1.0
 metadata/_custom_type_script = "uid://cs8am1q2b0j3o"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=481632730]
 shape = SubResource("RectangleShape2D_5gxjb")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1305529638]
+
+[node name="ObjectLabel" parent="." unique_id=934941461 instance=ExtResource("2_bseo5")]
