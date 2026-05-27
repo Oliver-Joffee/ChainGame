@@ -6,7 +6,7 @@ var state: STATES = STATES.NORMAL
 
 var inventory: Array[PhysicsObject] = []
 
-var gold: int = 0
+var gold: int = 10
 
 var dir: Vector2
 var velOffset: Vector2 = Vector2(0,0)
@@ -17,7 +17,15 @@ var health: float = 100
 @export var speed: float = 1000
 @export var chain: Chain
 
-
+func checkAnim():
+	if Input.is_action_pressed("down"):
+		$AnimatedSprite2D.play("back")
+	if Input.is_action_pressed("left"):
+		$AnimatedSprite2D.play("left")
+	if Input.is_action_pressed("up"):
+		$AnimatedSprite2D.play("up")
+	if Input.is_action_pressed("right"):
+		$AnimatedSprite2D.play("right")
 
 func stun():
 	state = STATES.STUNNED
@@ -30,7 +38,10 @@ func _ready() -> void:
 	
 func damage(damage: float):
 	health -= damage
-	
+
+func clear():
+	$Chain.grapple.clear()
+
 func knockback(source: Vector2, force: float):
 
 	velOffset += (global_position - source).normalized() * force
@@ -62,8 +73,29 @@ func _on_pickup_area_entered(area: Area2D) -> void:
 		area.pickingUp = true
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("ui_right"):
-		spawn(inventory[0])
+	if Input.is_action_just_released("down"):
+		$AnimatedSprite2D.play("idle")
+
+	if Input.is_action_just_released("up"):
+		$AnimatedSprite2D.play("upidle")
+
+	if Input.is_action_just_released("left"):
+		$AnimatedSprite2D.play("leftidle")
+
+	if Input.is_action_just_released("right"):
+		$AnimatedSprite2D.play("rightidle")
+
+	
+	if Input.is_action_pressed("down"):
+		$AnimatedSprite2D.play("back")
+	if Input.is_action_pressed("left"):
+		$AnimatedSprite2D.play("left")
+	if Input.is_action_pressed("up"):
+		$AnimatedSprite2D.play("up")
+	if Input.is_action_pressed("right"):
+		$AnimatedSprite2D.play("right")
+	
+	
 
 func spawn(object: PhysicsObject):
 	get_parent().add_child(object)

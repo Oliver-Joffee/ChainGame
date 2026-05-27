@@ -12,12 +12,19 @@ var newEnter
 var newLevel = Globals.levels.pick_random()
 
 func open():
+	print("recieved")
 	monitoring = true
 
 func _ready() -> void:
+	print("connected")
+	newLevel = Globals.levels.pick_random()
+	print(newLevel)
 	level.completed.connect(open)
 
 func _on_body_entered(body: Node2D) -> void:
+	newLevel = Globals.levels.pick_random()
+	if (randi_range(0,1) == 0):
+		newLevel = "res://World/shop.tscn"
 	if body is Player:
 		if dir == DIRECTIONS.Left:
 			newEnter = "right"

@@ -1,5 +1,7 @@
 extends Node
 
+var grapple: Grapple
+
 var Player: Player
 
 var items: Array[String] = ["res://Objects/icy_object.tscn",

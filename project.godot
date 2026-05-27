@@ -22,6 +22,7 @@ Globals="*uid://rrgjr3remk1i"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
 
 [gui]
 
@@ -83,6 +84,7 @@ showInven={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+2d/default_gravity=0.0
 2d/solver/solver_iterations=120
 
 [rendering]

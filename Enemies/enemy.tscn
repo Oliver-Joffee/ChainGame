@@ -2,16 +2,148 @@
 
 [ext_resource type="Script" uid="uid://c73n57xc8lugp" path="res://enemy.gd" id="1_3ih25"]
 [ext_resource type="Texture2D" uid="uid://cdlyco30fmej1" path="res://icon.svg" id="2_bxkaj"]
+[ext_resource type="Texture2D" uid="uid://cog7w82rhrlpp" path="res://Enemies/sword.png" id="3_47qgu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_47qgu"]
 size = Vector2(128, 128)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_572h1"]
+atlas = ExtResource("3_47qgu")
+region = Rect2(0, 0, 256, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rt1x0"]
+atlas = ExtResource("3_47qgu")
+region = Rect2(256, 0, 256, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8wvsg"]
+atlas = ExtResource("3_47qgu")
+region = Rect2(512, 0, 256, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gk8ng"]
+atlas = ExtResource("3_47qgu")
+region = Rect2(768, 0, 256, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4o6mh"]
+atlas = ExtResource("3_47qgu")
+region = Rect2(1024, 0, 256, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_koi6q"]
+atlas = ExtResource("3_47qgu")
+region = Rect2(1280, 0, 256, 384)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlnat"]
+atlas = ExtResource("3_47qgu")
+region = Rect2(768, 0, 256, 384)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t8uwx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_572h1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rt1x0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8wvsg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gk8ng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4o6mh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koi6q")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlnat")
+}],
+"loop": true,
+"name": &"placehold",
+"speed": 5.0
+}]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bxkaj"]
-size = Vector2(63, 200)
+size = Vector2(141, 235)
+
+[sub_resource type="Animation" id="Animation_572h1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D:monitoring")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_47qgu"]
+resource_name = "attack"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"start"
+}, {
+"args": [],
+"method": &"start"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.25, 0.40403643),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Area2D/AnimatedSprite2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"attack", 1.0, false],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_572h1"]
+_data = {
+&"RESET": SubResource("Animation_572h1"),
+&"attack": SubResource("Animation_47qgu")
+}
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1649313040 node_paths=PackedStringArray("damBox") groups=["Damageable"]]
+motion_mode = 1
 script = ExtResource("1_3ih25")
-health = 1.0
+health = 300.0
 damBox = NodePath("Area2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=652861406]
@@ -21,7 +153,21 @@ shape = SubResource("RectangleShape2D_47qgu")
 texture = ExtResource("2_bxkaj")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=698870212]
+visible = false
+monitoring = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D" unique_id=1361233172]
+position = Vector2(96, 0)
+scale = Vector2(-1, 1)
+sprite_frames = SubResource("SpriteFrames_t8uwx")
+animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=46255125]
-position = Vector2(131.5, 0)
+position = Vector2(141.5, 3.5)
 shape = SubResource("RectangleShape2D_bxkaj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1551811399]
+libraries/ = SubResource("AnimationLibrary_572h1")
+autoplay = &"attack"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

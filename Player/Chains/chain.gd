@@ -3,11 +3,18 @@ class_name Chain
 
 var stretch: float = .5
 
+var dir: int = 1
+
+@onready var grapple = $Grapple
+
 @export var origMax: float = 128
 var max: float = 0
 @export var player: CharacterBody2D
 
 var out: bool = false
+
+func switch():
+	dir *= -1
 
 class Point:
 	var currentPosition: Vector2 = Vector2(0,0)
@@ -132,7 +139,7 @@ func swing():
 	var tangent: Vector2 = Vector2(-dist.y, dist.x)
 	for i in range(pointArray.size()-1):
 		var point = pointArray[i]
-		point.force(tangent * 100 * i/10)
+		point.force((tangent * 100 * i/10) * dir)
 		
 
 func _physics_process(delta: float) -> void:

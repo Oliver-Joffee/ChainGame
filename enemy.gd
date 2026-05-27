@@ -4,10 +4,22 @@ var velOffset: Vector2 = Vector2(0,0)
 
 var gold: PackedScene = load("res://Gold/gold.tscn")
 
+@export var attackStat: float
+
+var attacking: bool = false
+
 @onready var player = Globals.Player
 @export var health: float = 500
 @export var distToKill: float
 @export var damBox: Area2D
+
+func scale(specialScale: int):
+	var newScale = (float(specialScale-1)/15) + 1
+	print("scale " + str(newScale))
+	print("health theory: " + str(health * newScale))
+	attackStat *= newScale
+	health *= newScale
+	print("health really: " + str(health))
 
 func gameover():
 	var newGold = gold.instantiate()
@@ -28,15 +40,38 @@ func damage(damage: float, colPosition: Vector2):
 	if health <= 0:
 		gameover()
 
+
+
+func start():
+	attacking = !attacking
+	$Area2D.visible = !$Area2D.visible
+
 func attack(thing):
 	if thing is Player:
-		thing.damage(0)
+		thing.damage(attackStat)
 		thing.knockback(global_position, 2000)
 		thing.stun()
 
 func _process(delta: float) -> void:
+	var prev = global_position
 	var target = player.global_position
-	$Area2D.look_at(target)
-	velocity = (target - global_position).normalized() * 500 + velOffset
+	
+	if global_position.distance_to(target) < 192:
+		$AnimationPlayer.play("attack")
+	
+	if !attacking:
+		$Area2D.look_at(target)
+	
+	
+	var newVel = (target - global_position).normalized() * 1050
+	if attacking:
+		newVel = Vector2.ZERO
+	
+	velocity = newVel + velOffset
+	
 	velOffset *= .9
 	move_and_slide()
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	attack(body)

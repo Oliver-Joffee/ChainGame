@@ -55,12 +55,14 @@ func pickup():
 	get_parent().remove_child(self)
 
 func _ready() -> void:
-	label.text = name + " Press E to pick up"
-	label.orig = name + " Press E to pick up"
+	label.text = objectName + " Press E to pick up"
+	label.orig = objectName + " Press E to pick up"
 	sprite.texture = texture
 	friction = originalFriction
 	body_entered.connect(collide)
 	oldPosition = global_position
+	
+	
 
 func get_enemies() -> Array:
 	return get_tree().get_nodes_in_group("Damageable")
@@ -78,6 +80,10 @@ func _input(event: InputEvent) -> void:
 			pickup()
 
 func collide(body):
+	if attached:
+		Globals.grapple.enter.emit()
+		return
+	
 	if body is Enemy && !attached:
 		body.damage(weight * velocity.length(), global_position)
 	var space = get_world_2d().direct_space_state
@@ -110,4 +116,5 @@ func update(delta: float):
 	
 	oldPosition = global_position
 	global_position += velocity
+
 	

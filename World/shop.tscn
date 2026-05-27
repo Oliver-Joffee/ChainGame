@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cr7scbnd0fv5d"]
+
+[ext_resource type="PackedScene" uid="uid://bhqoxk105psm2" path="res://World/basic_level.tscn" id="1_52pq3"]
+[ext_resource type="Script" uid="uid://cscevkflqsxeb" path="res://World/node_2d.gd" id="2_xxbpy"]
+
+[node name="Shop" unique_id=1685333662 instance=ExtResource("1_52pq3")]
+shop = true
+
+[node name="Node2D" type="Node2D" parent="." index="8" unique_id=391421132]
+script = ExtResource("2_xxbpy")
