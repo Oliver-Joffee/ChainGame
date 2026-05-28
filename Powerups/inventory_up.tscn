@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bpckapcji588s"]
+
+[ext_resource type="PackedScene" uid="uid://b4rd1e8kr2alj" path="res://Powerups/powerup.tscn" id="1_fmgvb"]
+[ext_resource type="Script" uid="uid://blg61qdghb4m" path="res://Powerups/inventory_up.gd" id="2_l0lip"]
+
+[node name="InventoryUp" unique_id=469403683 instance=ExtResource("1_fmgvb")]
+script = ExtResource("2_l0lip")
+cost = 6
+powerName = "Inventory Up"
+desc = "Increases the size of your inventory."

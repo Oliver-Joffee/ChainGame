@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://s7l3kqg4o1ra"]
+
+[ext_resource type="Script" uid="uid://cbp6ffl828hun" path="res://Objects/homing.gd" id="1_hkbmy"]
+[ext_resource type="Texture2D" uid="uid://dcdn7rpr8igue" path="res://Objects/homing.png" id="2_72ilk"]
+[ext_resource type="PackedScene" uid="uid://c6gij1a5hxpec" path="res://Objects/object_label.tscn" id="2_srkpl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hkbmy"]
+size = Vector2(128, 128)
+
+[node name="Homing" type="Area2D" unique_id=517190949 node_paths=PackedStringArray("sprite", "label")]
+script = ExtResource("1_hkbmy")
+texture = ExtResource("2_72ilk")
+sprite = NodePath("Sprite2D")
+objectName = "Homing Object"
+label = NodePath("ObjectLabel")
+desc = "This object bounces toward enemies."
+metadata/_custom_type_script = "uid://cs8am1q2b0j3o"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1496794994]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1741539789]
+shape = SubResource("RectangleShape2D_hkbmy")
+
+[node name="ObjectLabel" parent="." unique_id=934941461 instance=ExtResource("2_srkpl")]

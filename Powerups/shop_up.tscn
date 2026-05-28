@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bwtt2u4m78c41"]
+
+[ext_resource type="PackedScene" uid="uid://b4rd1e8kr2alj" path="res://Powerups/powerup.tscn" id="1_mkxge"]
+[ext_resource type="Script" uid="uid://dkc1k5v65y7d6" path="res://Powerups/shop_up.gd" id="2_83mfj"]
+
+[node name="ShopUp" unique_id=469403683 instance=ExtResource("1_mkxge")]
+script = ExtResource("2_83mfj")
+cost = 7
+powerName = "Shop Item Up"
+desc = "Causes more items to appear in shops."

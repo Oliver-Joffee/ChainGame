@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://b4rd1e8kr2alj"]
+
+[ext_resource type="Texture2D" uid="uid://cnaj84buyvavy" path="res://Powerups/power.png" id="1_1ta4s"]
+
+[sub_resource type="Curve" id="Curve_tmy8w"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(1, -360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_o3a3c"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, -27.080078), 0.0, 0.0, 0, 0, Vector2(0.8363637, 200), 0.0, 0.0, 0, 0, Vector2(1, -197.72607), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_5vsq0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r1v38"]
+radius = 128.0
+
+[node name="Powerup" type="Area2D" unique_id=469403683]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2126792543]
+texture = ExtResource("1_1ta4s")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1079234603]
+emitting = false
+amount = 32
+one_shot = true
+speed_scale = 2.16
+explosiveness = 1.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 328.13
+initial_velocity_max = 738.42
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+angular_velocity_curve = SubResource("Curve_tmy8w")
+linear_accel_min = -100.0
+linear_accel_max = -100.0
+linear_accel_curve = SubResource("Curve_o3a3c")
+scale_amount_min = 10.0
+scale_amount_max = 50.0
+scale_amount_curve = SubResource("Curve_5vsq0")
+color = Color(0.96, 0.848, 0, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1307290731]
+shape = SubResource("CircleShape2D_r1v38")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=787668793]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="CenterContainer" unique_id=104329154]
+visible = false
+z_index = 1
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 48
+text = "kljasdhflksajdhf"
+vertical_alignment = 2
+
+[node name="Timer" type="Timer" parent="." unique_id=607766734]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

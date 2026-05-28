@@ -182,7 +182,7 @@ shape = SubResource("RectangleShape2D_btcbx")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=388263891]
 sprite_frames = SubResource("SpriteFrames_n471f")
 animation = &"back"
-frame_progress = 0.07108983
+frame_progress = 0.8446178
 
 [connection signal="area_entered" from="Pickup" to="." method="_on_pickup_area_entered"]
 [connection signal="area_exited" from="Pickup" to="." method="_on_pickup_area_exited"]

@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://djyrcs851n7me"]
+
+[ext_resource type="Script" uid="uid://th1luv74lt8r" path="res://Powerups/spike.gd" id="1_rari4"]
+[ext_resource type="Texture2D" uid="uid://otofo5go15kh" path="res://Objects/spike.png" id="2_bmghw"]
+[ext_resource type="PackedScene" uid="uid://c6gij1a5hxpec" path="res://Objects/object_label.tscn" id="2_d1fyn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bmghw"]
+size = Vector2(128, 128)
+
+[node name="Spike" type="Area2D" unique_id=203030518 node_paths=PackedStringArray("sprite", "label")]
+script = ExtResource("1_rari4")
+texture = ExtResource("2_bmghw")
+sprite = NodePath("Sprite2D")
+objectName = "Spike"
+label = NodePath("ObjectLabel")
+desc = "An object that can only damage when it's standing still."
+price = 14
+metadata/_custom_type_script = "uid://cs8am1q2b0j3o"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1146074965]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1076392506]
+shape = SubResource("RectangleShape2D_bmghw")
+
+[node name="ObjectLabel" parent="." unique_id=934941461 instance=ExtResource("2_d1fyn")]

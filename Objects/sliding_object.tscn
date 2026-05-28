@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cs8am1q2b0j3o" path="res://Objects/PhysicsObject.gd" id="1_5gxjb"]
 [ext_resource type="PackedScene" uid="uid://c6gij1a5hxpec" path="res://Objects/object_label.tscn" id="2_bseo5"]
-[ext_resource type="Texture2D" uid="uid://cdlyco30fmej1" path="res://icon.svg" id="2_wijcp"]
+[ext_resource type="Texture2D" uid="uid://babuyv04lyvim" path="res://Objects/cube.png" id="2_wijcp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gxjb"]
 size = Vector2(128, 128)

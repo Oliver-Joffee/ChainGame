@@ -3,7 +3,7 @@ extends HBoxContainer
 var boxObject: PhysicsObject
 
 func create(object: PhysicsObject):
-	$Label.text = object.name + ": " + object.desc
+	$Label.text = object.objectName + ": " + object.desc
 	$TextureButton.texture_normal = object.texture
 	boxObject = object
 

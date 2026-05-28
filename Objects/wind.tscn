@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ctilefn66ydtl"]
+
+[ext_resource type="Script" uid="uid://dwa10ql6odj4v" path="res://Objects/wind.gd" id="1_id1xe"]
+[ext_resource type="PackedScene" uid="uid://c6gij1a5hxpec" path="res://Objects/object_label.tscn" id="2_1s1dm"]
+[ext_resource type="Texture2D" uid="uid://bwwlmwce7022n" path="res://Objects/wind.png" id="2_d5n8p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d5n8p"]
+size = Vector2(128, 128)
+
+[node name="Wind" type="Area2D" unique_id=1029591208 node_paths=PackedStringArray("sprite", "label")]
+script = ExtResource("1_id1xe")
+texture = ExtResource("2_d5n8p")
+sprite = NodePath("Sprite2D")
+objectName = "Wind"
+label = NodePath("ObjectLabel")
+desc = "Doesn't do that much damage, but pushes enemies very far back."
+weight = 0.7
+metadata/_custom_type_script = "uid://cs8am1q2b0j3o"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=229773621]
+
+[node name="ObjectLabel" parent="." unique_id=934941461 instance=ExtResource("2_1s1dm")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=467078340]
+shape = SubResource("RectangleShape2D_d5n8p")

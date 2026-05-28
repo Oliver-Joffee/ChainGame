@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://da5hdk251aks2"]
+
+[sub_resource type="Curve" id="Curve_tmy8w"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(1, -360), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_o3a3c"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, -27.080078), 0.0, 0.0, 0, 0, Vector2(0.8363637, 200), 0.0, 0.0, 0, 0, Vector2(1, -197.72607), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_5vsq0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="PickupPart" type="CPUParticles2D" unique_id=919118266]
+emitting = false
+amount = 32
+one_shot = true
+speed_scale = 2.16
+explosiveness = 1.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 328.13
+initial_velocity_max = 738.42
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+angular_velocity_curve = SubResource("Curve_tmy8w")
+linear_accel_min = -100.0
+linear_accel_max = -100.0
+linear_accel_curve = SubResource("Curve_o3a3c")
+scale_amount_min = 10.0
+scale_amount_max = 50.0
+scale_amount_curve = SubResource("Curve_5vsq0")
+color = Color(0.96, 0.848, 0, 1)

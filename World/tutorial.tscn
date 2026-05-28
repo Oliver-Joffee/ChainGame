@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dn52nafvqaojf"]
+
+[ext_resource type="PackedScene" uid="uid://bhqoxk105psm2" path="res://World/basic_level.tscn" id="1_2ayt5"]
+[ext_resource type="Texture2D" uid="uid://d22c58smkj1js" path="res://World/tutorial.png" id="2_3wrpl"]
+[ext_resource type="PackedScene" uid="uid://k2snd0b5bdpo" path="res://Objects/test_physics.tscn" id="3_3wrpl"]
+
+[node name="Tutorial" unique_id=1685333662 instance=ExtResource("1_2ayt5")]
+shop = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="8" unique_id=1922280514]
+scale = Vector2(8, 8)
+texture = ExtResource("2_3wrpl")
+
+[node name="TestPhysics" parent="." index="9" unique_id=1772979599 instance=ExtResource("3_3wrpl")]

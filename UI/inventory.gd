@@ -2,8 +2,7 @@ extends Control
 class_name Inventory
 
 const ELEMENT = preload("res://UI/inventory_element.tscn")
-@onready var vBox = $CenterContainer/VScrollBar/VBoxContainer
-
+@onready var vBox = %VBoxContainer
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("showInven"):
 		if visible:

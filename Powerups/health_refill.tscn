@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cm3rm34nofhx5"]
+
+[ext_resource type="PackedScene" uid="uid://b4rd1e8kr2alj" path="res://Powerups/powerup.tscn" id="1_5kgil"]
+[ext_resource type="Script" uid="uid://dl8x62pc3koe1" path="res://health_refill.gd" id="2_haevj"]
+
+[node name="HealthRefill" unique_id=469403683 instance=ExtResource("1_5kgil")]
+script = ExtResource("2_haevj")
+cost = 2
+powerName = "Health refill"
+desc = "Heals."

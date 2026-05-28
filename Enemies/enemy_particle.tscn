@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://do3tg14my38mv"]
+
+[ext_resource type="Script" uid="uid://colrs83m0bclm" path="res://enemy_particle.gd" id="1_s2vy0"]
+
+[sub_resource type="Curve" id="Curve_s2vy0"]
+_limits = [-360.0, 360.0, 0.0, 1.0]
+_data = [Vector2(0, 360), 0.0, 0.0, 0, 0, Vector2(0.28787878, -360), 0.0, 0.0, 0, 0, Vector2(1, -360), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_1bxin"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 200), 0.0, 0.0, 0, 0, Vector2(0.99999, 200), 0.0, 0.0, 0, 0, Vector2(1, -200), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_01mqp"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_ydpot"]
+_limits = [0.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="EnemyParticle" type="CPUParticles2D" unique_id=831882865]
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 0.9
+spread = 16.88
+gravity = Vector2(0, 0)
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+angular_velocity_curve = SubResource("Curve_s2vy0")
+linear_accel_curve = SubResource("Curve_1bxin")
+angle_max = 412.5
+scale_amount_min = 0.0
+scale_amount_max = 58.29
+scale_amount_curve = SubResource("Curve_01mqp")
+color = Color(1, 0, 0, 1)
+anim_speed_curve = SubResource("Curve_ydpot")
+script = ExtResource("1_s2vy0")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

@@ -1,15 +1,14 @@
 [gd_scene format=3 uid="uid://dkyxekxhch13y"]
 
 [ext_resource type="PackedScene" uid="uid://bhqoxk105psm2" path="res://World/basic_level.tscn" id="1_ir7rp"]
-[ext_resource type="PackedScene" uid="uid://k2snd0b5bdpo" path="res://Objects/test_physics.tscn" id="3_jxhpq"]
-[ext_resource type="PackedScene" uid="uid://do1f2yt082wyl" path="res://Enemies/enemy.tscn" id="3_wen1g"]
+[ext_resource type="PackedScene" uid="uid://do1f2yt082wyl" path="res://Enemies/enemy.tscn" id="3_jxhpq"]
+[ext_resource type="PackedScene" uid="uid://cc5608rs716j5" path="res://Objects/plane.tscn" id="3_wen1g"]
 
 [node name="TestLevel" unique_id=1685333662 instance=ExtResource("1_ir7rp")]
 
-[node name="TestPhysics" parent="." index="8" unique_id=1772979599 instance=ExtResource("3_jxhpq")]
-position = Vector2(-282, -198)
+[node name="Gate4" parent="." index="7" unique_id=2112556415]
+rotation = -1.5708421
 
-[node name="TestPhysics2" parent="." index="9" unique_id=185348427 instance=ExtResource("3_jxhpq")]
-position = Vector2(-82, -192)
+[node name="Enemy" parent="." index="8" unique_id=1649313040 instance=ExtResource("3_jxhpq")]
 
-[node name="Enemy" parent="." index="10" unique_id=1649313040 instance=ExtResource("3_wen1g")]
+[node name="Plane" parent="." index="9" unique_id=1055484958 instance=ExtResource("3_wen1g")]

@@ -12,21 +12,20 @@ var item: PhysicsObject = itemPath.instantiate()
 var orig = item.objectName + " " + item.desc + " " + str(item.price) + " Gold. Press E to buy."
 
 func _ready() -> void:
-	print(item.objectName + str(buyable))
+
 	$Sprite2D.texture = item.texture
-	$Label.text = item.objectName + " " + item.desc + " " + str(item.price) + " Gold. Press E to buy."
+	$CenterContainer/Label.text = item.objectName + " " + item.desc + " " + str(item.price) + " Gold. Press E to buy."
 	body_entered.connect(enterExit)
 	body_exited.connect(enterExit)
 
 func enterExit(body: CollisionObject2D):
 	if body is Player:
 		buyable = !buyable
-		$Label.visible = !$Label.visible
+		$CenterContainer/Label.visible = !$CenterContainer/Label.visible
 
 func buy():
-	print("bought")
 	if Globals.Player.gold < item.price:
-		$Label.text = "Not enough money."
+		$CenterContainer/Label.text = "Not enough money."
 		$Timer.start(1)
 	else:
 		Globals.Player.gold -= item.price
@@ -42,6 +41,5 @@ func _input(event: InputEvent) -> void:
 		if buyable:
 			buy()
 
-
 func _on_timer_timeout() -> void:
-	$Label.text = orig
+	$CenterContainer/Label.text = orig

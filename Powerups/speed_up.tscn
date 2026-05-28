@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cfx4xu6ao4pmt"]
+
+[ext_resource type="PackedScene" uid="uid://b4rd1e8kr2alj" path="res://Powerups/powerup.tscn" id="1_pp0ex"]
+[ext_resource type="Script" uid="uid://cnyp5jwvb3t4x" path="res://speed_up.gd" id="2_y8tb0"]
+
+[node name="SpeedUp" unique_id=469403683 instance=ExtResource("1_pp0ex")]
+script = ExtResource("2_y8tb0")
+cost = 12
+powerName = "Speed up"
+desc = "Multiplies the players speed by 1.2."
+
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

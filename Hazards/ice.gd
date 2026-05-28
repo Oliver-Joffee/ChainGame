@@ -1,6 +1,8 @@
 extends Hazard
 class_name Ice
 
+
+
 var bodyFricDict: Dictionary[PhysicsObject, float]
 
 func exitEffect(body):

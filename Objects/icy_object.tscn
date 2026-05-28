@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://g37sxqjputgr"]
 
 [ext_resource type="Script" uid="uid://omd7iaf6awbw" path="res://Objects/icy_object.gd" id="1_ey770"]
-[ext_resource type="Texture2D" uid="uid://cdlyco30fmej1" path="res://icon.svg" id="2_asusx"]
+[ext_resource type="Texture2D" uid="uid://ckl4vjkery4af" path="res://Objects/snowball.png" id="2_asusx"]
 [ext_resource type="PackedScene" uid="uid://c6gij1a5hxpec" path="res://Objects/object_label.tscn" id="3_chkvf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fuvr6"]

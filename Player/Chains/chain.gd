@@ -110,12 +110,14 @@ func send(pos: Vector2):
 	max = origMax
 	pointArray[-1].force((pointArray[-1].currentPosition - pos).normalized() * max/2 * pointArray.size())
 	$Grapple.monitoring = true
+	$Grapple.visible = true
 
 func retract(pull: bool = false):
 	out = false
 	max = 0
 	$Grapple.clear()
 	$Grapple.monitoring = false
+	$Grapple.visible = false
 	
 
 #Initiallizes array of points

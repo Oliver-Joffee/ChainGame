@@ -24,29 +24,36 @@ func _ready() -> void:
 			i.scale(enemyScale)
 	
 	if enter == "right":
-		player.global_position = Vector2(1727, 0)
-		rightGate.queue_free()
+		rightGate.free()
+		player.global_position = Vector2(1727 - 160, 0)
+		
 	elif enter == "left":
-		player.global_position = Vector2(-1727, 0)
-		leftGate.queue_free()
+		leftGate.free()
+		player.global_position = Vector2(-1727 + 160 , 0)
+		
 	elif enter == "up":
-		player.global_position = Vector2(0, -960)
-		upGate.queue_free()
+		upGate.free()
+		player.global_position = Vector2(0, -800)
+		
 	elif enter == "down":
-		player.global_position = Vector2(0, 960)
-		downGate.queue_free()
+		downGate.free()
+		player.global_position = Vector2(0, 800)
 		
 	if shop:
-		call_deferred("checkForEnemies")
+		await get_tree().physics_frame
+		await get_tree().physics_frame
+		for i in get_children():
+			if i is Gate:
+				i.open()
 
-func checkForEnemies() -> bool:
-	print("happened")
+func checkForEnemies(exception: Enemy = null) -> bool:
+
 	for body in area.get_overlapping_bodies():
-		print("body")
-		if body is Enemy:
-			completed.emit()
+		if body is Enemy && body != exception:
 			return true
 	completed.emit()
+	for obj in get_tree().get_nodes_in_group("pushables"):
+		obj.specVel = Vector2.ZERO
 	return false
 
 

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cc5608rs716j5"]
+
+[ext_resource type="Script" uid="uid://bseg4mtrvjaho" path="res://Objects/plane.gd" id="1_u6e00"]
+[ext_resource type="PackedScene" uid="uid://c6gij1a5hxpec" path="res://Objects/object_label.tscn" id="2_u6e00"]
+[ext_resource type="Texture2D" uid="uid://ch8g3wpylhyfe" path="res://Objects/plane.png" id="2_vnfao"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vnfao"]
+size = Vector2(128, 128)
+
+[node name="Plane" type="Area2D" unique_id=1055484958 node_paths=PackedStringArray("sprite", "label")]
+script = ExtResource("1_u6e00")
+texture = ExtResource("2_vnfao")
+sprite = NodePath("Sprite2D")
+objectName = "Bomber"
+label = NodePath("ObjectLabel")
+desc = "A plane that leaves bombs behind it. However, it doesn;t damage enemies directly."
+price = 6
+weight = 0.0
+metadata/_custom_type_script = "uid://cs8am1q2b0j3o"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=866635123]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1973165322]
+shape = SubResource("RectangleShape2D_vnfao")
+
+[node name="ObjectLabel" parent="." unique_id=934941461 instance=ExtResource("2_u6e00")]

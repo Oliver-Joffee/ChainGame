@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://k2snd0b5bdpo"]
 
 [ext_resource type="Script" uid="uid://cs8am1q2b0j3o" path="res://Objects/PhysicsObject.gd" id="1_bgyba"]
-[ext_resource type="Texture2D" uid="uid://cdlyco30fmej1" path="res://icon.svg" id="2_8768x"]
+[ext_resource type="Texture2D" uid="uid://db2bl6a4nomcp" path="res://Objects/rock.png" id="2_0250f"]
 [ext_resource type="PackedScene" uid="uid://c6gij1a5hxpec" path="res://Objects/object_label.tscn" id="3_0250f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8768x"]
@@ -9,9 +9,9 @@ size = Vector2(128, 128)
 
 [node name="TestPhysics" type="Area2D" unique_id=1772979599 node_paths=PackedStringArray("sprite", "label") groups=["pushables"]]
 script = ExtResource("1_bgyba")
-texture = ExtResource("2_8768x")
+texture = ExtResource("2_0250f")
 sprite = NodePath("Sprite2D")
-objectName = "Normal Object"
+objectName = "Rock"
 label = NodePath("ObjectLabel")
 desc = "A normal object"
 weight = 2.0

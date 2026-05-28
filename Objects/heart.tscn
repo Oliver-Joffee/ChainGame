@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cq6kyjfqrhi6u"]
+
+[ext_resource type="Script" uid="uid://dnp2sg4yrp86x" path="res://Objects/heart.gd" id="1_i6nch"]
+[ext_resource type="Texture2D" uid="uid://wiq7mtffr43x" path="res://Objects/heart.png" id="2_debk5"]
+[ext_resource type="PackedScene" uid="uid://c6gij1a5hxpec" path="res://Objects/object_label.tscn" id="2_i6nch"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_debk5"]
+size = Vector2(128, 128)
+
+[node name="Heart" type="Area2D" unique_id=376839414 node_paths=PackedStringArray("sprite", "label")]
+script = ExtResource("1_i6nch")
+texture = ExtResource("2_debk5")
+sprite = NodePath("Sprite2D")
+objectName = "Heart"
+label = NodePath("ObjectLabel")
+desc = "Damage scales with players health"
+metadata/_custom_type_script = "uid://cs8am1q2b0j3o"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1697608588]
+shape = SubResource("RectangleShape2D_debk5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1509174849]
+
+[node name="ObjectLabel" parent="." unique_id=934941461 instance=ExtResource("2_i6nch")]

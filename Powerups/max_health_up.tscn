@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://ccyadjqix35w0"]
+
+[ext_resource type="PackedScene" uid="uid://b4rd1e8kr2alj" path="res://Powerups/powerup.tscn" id="1_or32j"]
+[ext_resource type="Script" uid="uid://bd7neyd0tx47q" path="res://Powerups/max_health_up.gd" id="2_pw0us"]
+
+[node name="MaxHealthUp" unique_id=469403683 instance=ExtResource("1_or32j")]
+script = ExtResource("2_pw0us")
+cost = 9
+powerName = "Max Health Up"
+desc = "Increases max health"

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://btf1bx7uwdah"]
+
+[ext_resource type="Script" uid="uid://dgd7spk0i3pia" path="res://Objects/rocket.gd" id="1_ijyl3"]
+[ext_resource type="PackedScene" uid="uid://c6gij1a5hxpec" path="res://Objects/object_label.tscn" id="2_07b4d"]
+[ext_resource type="Texture2D" uid="uid://cs81eifroe3du" path="res://Objects/rocket.png" id="2_d4paf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d4paf"]
+size = Vector2(128, 128)
+
+[node name="Rocket" type="Area2D" unique_id=1296169299 node_paths=PackedStringArray("sprite", "label")]
+script = ExtResource("1_ijyl3")
+texture = ExtResource("2_d4paf")
+sprite = NodePath("Sprite2D")
+objectName = "Rocket"
+label = NodePath("ObjectLabel")
+desc = "An extremely object that goes very fast, but is a one time use."
+price = 12
+weight = 8.0
+originalFriction = 1.1
+metadata/_custom_type_script = "uid://cs8am1q2b0j3o"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1133201414]
+
+[node name="ObjectLabel" parent="." unique_id=934941461 instance=ExtResource("2_07b4d")]
+offset_right = 384.0
+offset_bottom = -74.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=941718674]
+shape = SubResource("RectangleShape2D_d4paf")

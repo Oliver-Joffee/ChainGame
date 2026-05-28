@@ -4,9 +4,11 @@ var velOffset: Vector2 = Vector2(0,0)
 
 var gold: PackedScene = load("res://Gold/gold.tscn")
 
-@export var attackStat: float
+@export var attackStat: float = 20
 
 var attacking: bool = false
+
+var particle = load("res://Enemies/enemy_particle.tscn")
 
 @onready var player = Globals.Player
 @export var health: float = 500
@@ -15,11 +17,10 @@ var attacking: bool = false
 
 func scale(specialScale: int):
 	var newScale = (float(specialScale-1)/15) + 1
-	print("scale " + str(newScale))
-	print("health theory: " + str(health * newScale))
+
 	attackStat *= newScale
 	health *= newScale
-	print("health really: " + str(health))
+
 
 func gameover():
 	var newGold = gold.instantiate()
@@ -27,15 +28,17 @@ func gameover():
 	newGold.global_position = global_position
 	queue_free()
 	var level: Level = get_parent()
-	level.checkForEnemies()
+	level.checkForEnemies(self)
 
-func _ready() -> void:
-	damBox.body_entered.connect(attack)
 
-func damage(damage: float, colPosition: Vector2):
+func damage(damage: float, colPosition: Vector2, knockBackStrength: float):
 	
-	print("damage" + str(damage))
-	velOffset += (global_position - colPosition).normalized() * 1000
+	var newPart = particle.instantiate()
+	get_parent().add_child(newPart)
+	newPart.global_position = global_position
+	newPart.rotation_degrees = rad_to_deg((colPosition - global_position).normalized().angle())
+	newPart.emitting = true
+	velOffset += (global_position - colPosition).normalized() * knockBackStrength
 	health -= round(damage)
 	if health <= 0:
 		gameover()
@@ -48,6 +51,7 @@ func start():
 
 func attack(thing):
 	if thing is Player:
+
 		thing.damage(attackStat)
 		thing.knockback(global_position, 2000)
 		thing.stun()
@@ -70,6 +74,10 @@ func _process(delta: float) -> void:
 	velocity = newVel + velOffset
 	
 	velOffset *= .9
+	if newVel.x < 0:
+		$Sprite2D.play("left")
+	elif newVel.x > 0:
+		$Sprite2D.play("right")
 	move_and_slide()
 
 

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bgl2hc4a83uj"]
 
 [ext_resource type="Script" uid="uid://dlsfmb68pasei" path="res://Gold/gold.gd" id="1_yc8ph"]
+[ext_resource type="Texture2D" uid="uid://iru6m1ifm3c3" path="res://World/coin.png" id="2_6g8ak"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kn5ft"]
 size = Vector2(128, 128)
@@ -13,5 +14,8 @@ script = ExtResource("1_yc8ph")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=375330412]
 shape = SubResource("RectangleShape2D_kn5ft")
 debug_color = Color(0.65309435, 0.51867753, 0, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1217285667]
+texture = ExtResource("2_6g8ak")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

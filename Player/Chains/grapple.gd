@@ -27,7 +27,7 @@ func objectIn(object: PhysicsObject) -> bool:
 	#enter.emit()
 		
 func clear():
-	print("cleared")
+
 	for i in objects:
 		i.physic.detach()
 	objects.clear()

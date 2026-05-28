@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://825o5owvw2cy"]
+
+[ext_resource type="Script" uid="uid://bnkljs6eif7da" path="res://Objects/physics_object.gd" id="1_ume7x"]
+[ext_resource type="PackedScene" uid="uid://c6gij1a5hxpec" path="res://Objects/object_label.tscn" id="3_imqix"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qm1ft"]
+load_path = "res://.godot/imported/slime.png-d60d1a3a9550e1a1676c746a4ce23762.ctex"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ap3w2"]
+size = Vector2(128, 128)
+
+[node name="BouncyObject" type="Area2D" unique_id=1332337923 node_paths=PackedStringArray("sprite", "label")]
+script = ExtResource("1_ume7x")
+texture = SubResource("CompressedTexture2D_qm1ft")
+sprite = NodePath("Sprite2D")
+objectName = "BouncyObject"
+label = NodePath("ObjectLabel")
+metadata/_custom_type_script = "uid://cs8am1q2b0j3o"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1117945674]
+
+[node name="ObjectLabel" parent="." unique_id=934941461 instance=ExtResource("3_imqix")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1372220848]
+shape = SubResource("RectangleShape2D_ap3w2")

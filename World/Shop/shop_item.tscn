@@ -13,18 +13,24 @@ script = ExtResource("1_b77c6")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=79455262]
 shape = SubResource("CircleShape2D_b77c6")
 
-[node name="Label" type="Label" parent="." unique_id=444083340]
+[node name="Timer" type="Timer" parent="." unique_id=148033674]
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2137572547]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="CenterContainer" unique_id=444083340]
 visible = false
-offset_left = -228.0
-offset_top = -150.0
-offset_right = 228.0
-offset_bottom = -96.0
+z_index = 1
+layout_mode = 2
 size_flags_vertical = 10
 theme_override_font_sizes/font_size = 48
 text = "kljasdhflksajdhf"
 vertical_alignment = 2
-autowrap_mode = 2
-
-[node name="Timer" type="Timer" parent="." unique_id=148033674]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

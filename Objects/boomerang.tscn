@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://foq52rb6gaoh"]
+
+[ext_resource type="Script" uid="uid://tk74hrjyhm8c" path="res://Objects/boomerang.gd" id="1_wito0"]
+[ext_resource type="Texture2D" uid="uid://cdlyco30fmej1" path="res://icon.svg" id="2_g2nwx"]
+[ext_resource type="PackedScene" uid="uid://c6gij1a5hxpec" path="res://Objects/object_label.tscn" id="2_wito0"]
+[ext_resource type="Texture2D" uid="uid://7wkg6ylkmref" path="res://Objects/boomerang.png" id="3_e4no8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2nwx"]
+size = Vector2(128, 128)
+
+[node name="Boomerang" type="Area2D" unique_id=288062143 node_paths=PackedStringArray("sprite", "label")]
+script = ExtResource("1_wito0")
+texture = ExtResource("2_g2nwx")
+sprite = NodePath("Sprite2D")
+objectName = "Boomerang"
+label = NodePath("ObjectLabel")
+desc = "Bounces back towards the player."
+price = 7
+metadata/_custom_type_script = "uid://cs8am1q2b0j3o"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=201281610]
+texture = ExtResource("3_e4no8")
+
+[node name="ObjectLabel" parent="." unique_id=934941461 instance=ExtResource("2_wito0")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=474064509]
+shape = SubResource("RectangleShape2D_g2nwx")
