@@ -5,7 +5,9 @@ with more unique interactions than I thought I'd be able to, all
 because of inheritance and classes. In terms of functions and problem solving, I'm 
 very proud of the verlet physics engine I created. I had to make it
 from scratch, because my original plan for the chain to be made 
-out of RigidBodies and PinJoint2D nodes didn't work. Once I made 
+out of RigidBodies and PinJoint2D nodes didn't work.
+(https://github.com/Oliver-Joffee/ChainGame/commit/1524a2eb5669cf4e2e982470425d5f2308bfb50f#diff-80bace942e1d45a63132169e286f13a1aabe23d0161bb7159d5c8bfde2e4e2de)
+Once I made 
 the chain a verlet simulation, everything else had to be one as well.
 The main resource I used to learn was the in-engine docs. I think 
 there may have been I better way to spawn items and powerups than 
@@ -18,7 +20,7 @@ In the future, I'll add more objects and curses. Curses are an idea
 I had late in development, so I couldn't do many besides Curse of 
 Fragility. I also want to make more interesting levels and hazards.
 I ended up only using the hazard class for ice, which i felt was a waste.
-I also need a better tutorial.
+I also need a better tutorial. I also have to better at organization.
 
 Verlet integration:
 	https://www.youtube.com/watch?v=1qSJSJKo3rc
