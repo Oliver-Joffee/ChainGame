@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cnt0yb2meps0l"]
+
+[ext_resource type="PackedScene" uid="uid://b4rd1e8kr2alj" path="res://Powerups/powerup.tscn" id="1_r53rp"]
+[ext_resource type="Script" uid="uid://b2ujcw4i5fs4q" path="res://Powerups/fragile.gd" id="2_1t1xm"]
+
+[node name="Fragile" unique_id=469403683 instance=ExtResource("1_r53rp")]
+script = ExtResource("2_1t1xm")
+cost = 3
+powerName = "Curse of Fragility"
+desc = "Makes all enemies have half as much health, but sets player health to one every stage."

@@ -45,6 +45,10 @@ func _ready() -> void:
 		for i in get_children():
 			if i is Gate:
 				i.open()
+	
+	if Globals.fragile:
+		for i in get_tree().get_nodes_in_group("Enemy"):
+			i.health = int(i.health / 2)
 
 func checkForEnemies(exception: Enemy = null) -> bool:
 

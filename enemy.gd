@@ -33,11 +33,12 @@ func gameover():
 
 func damage(damage: float, colPosition: Vector2, knockBackStrength: float):
 	
-	var newPart = particle.instantiate()
-	get_parent().add_child(newPart)
-	newPart.global_position = global_position
-	newPart.rotation_degrees = rad_to_deg((colPosition - global_position).normalized().angle())
-	newPart.emitting = true
+	if damage != 0:
+		var newPart = particle.instantiate()
+		get_parent().add_child(newPart)
+		newPart.global_position = global_position
+		newPart.rotation_degrees = rad_to_deg((colPosition - global_position).normalized().angle())
+		newPart.emitting = true
 	velOffset += (global_position - colPosition).normalized() * knockBackStrength
 	health -= round(damage)
 	if health <= 0:

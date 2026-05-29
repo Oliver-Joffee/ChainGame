@@ -9,12 +9,15 @@ var buyable: bool = false
 var itemPath: PackedScene = load(chosen)
 var item: PhysicsObject = itemPath.instantiate()
 
-var orig = item.objectName + " " + item.desc + " " + str(item.price) + " Gold. Press E to buy."
+var cost = item.price
+var orig = item.objectName + " " + item.desc + " " + str(cost) + " Gold. Press E to buy."
+
+
 
 func _ready() -> void:
-
+	cost = int(cost / Globals.cost)
 	$Sprite2D.texture = item.texture
-	$CenterContainer/Label.text = item.objectName + " " + item.desc + " " + str(item.price) + " Gold. Press E to buy."
+	$CenterContainer/Label.text = item.objectName + " " + item.desc + " " + str(cost) + " Gold. Press E to buy."
 	body_entered.connect(enterExit)
 	body_exited.connect(enterExit)
 
@@ -24,11 +27,11 @@ func enterExit(body: CollisionObject2D):
 		$CenterContainer/Label.visible = !$CenterContainer/Label.visible
 
 func buy():
-	if Globals.Player.gold < item.price:
+	if Globals.Player.gold < cost:
 		$CenterContainer/Label.text = "Not enough money."
 		$Timer.start(1)
 	else:
-		Globals.Player.gold -= item.price
+		Globals.Player.gold -= cost
 		get_parent().add_child(item)
 		item.global_position = global_position
 		item.oldPosition = global_position

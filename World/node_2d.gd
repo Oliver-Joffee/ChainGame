@@ -20,6 +20,8 @@ func _ready() -> void:
 		add_child(newItem)
 		newItem.global_position = Vector2(space, 0) 
 		space += gap
+		if newItem is ShopItem:
+			pass
 		if newItem is Powerup:
 			shopItem = load(Globals.powerUp.pick_random())
 		

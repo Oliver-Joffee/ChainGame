@@ -181,7 +181,7 @@ _data = {
 &"attack": SubResource("Animation_47qgu")
 }
 
-[node name="Enemy" type="CharacterBody2D" unique_id=1649313040 node_paths=PackedStringArray("damBox") groups=["Damageable"]]
+[node name="Enemy" type="CharacterBody2D" unique_id=1649313040 node_paths=PackedStringArray("damBox") groups=["Damageable", "Enemy"]]
 motion_mode = 1
 script = ExtResource("1_3ih25")
 health = 300.0

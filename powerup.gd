@@ -11,6 +11,7 @@ var part = load("res://Powerups/pickup_part.tscn")
 var orig: String = ""
 
 func _ready() -> void:
+	cost = int(cost/Globals.cost)
 	orig = powerName + ": " + desc + " " + str(cost) + " gold."
 	$CenterContainer/Label.text = orig
 	body_entered.connect(entered)

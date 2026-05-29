@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dnpdowdtvd2n2"]
+
+[ext_resource type="PackedScene" uid="uid://b4rd1e8kr2alj" path="res://Powerups/powerup.tscn" id="1_4kb4p"]
+[ext_resource type="Script" uid="uid://dnubj5h5lypvl" path="res://cost_down.gd" id="2_2axki"]
+
+[node name="CostDown" unique_id=469403683 instance=ExtResource("1_4kb4p")]
+script = ExtResource("2_2axki")
+cost = 15
+powerName = "Shop Cost Down"
+desc = "Makes all shop items cheaper."

@@ -40,7 +40,7 @@ func _ready() -> void:
 	Globals.Player = self
 	
 func damage(damage: float):
-	health -= damage
+	health -= int(damage)
 	if health <= 0:
 		gameover()
 

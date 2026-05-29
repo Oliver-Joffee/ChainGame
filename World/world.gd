@@ -3,6 +3,12 @@ class_name World
 
 var levelCount: int = 1
 
+func _ready() -> void:
+	Globals.cost = 1
+	Globals.fragile = false
+	Globals.levelCount = 1
+	Globals.shopNum = 3
+
 func swapToScene(scenePath: String, dir: String):
 	
 	Globals.Player.clear()
@@ -18,4 +24,9 @@ func swapToScene(scenePath: String, dir: String):
 	newLevel.enter = dir
 	add_child(newLevel)
 	
+	if Globals.fragile:
+		Globals.Player.health = 1
 	
+
+func _process(delta: float) -> void:
+	print(Globals.shopNum)
